@@ -11,10 +11,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 # Optional: add contact me email functionality (Day 60)
 # import smtplib
-
+import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = "8BYkEfBA6O6donzWlSihBXox7C0sKR6b"
+print(os.environ.get('FLASK_KEY'))
 ckeditor = CKEditor(app)
 
 
@@ -42,6 +43,7 @@ gravatar = Gravatar(app,
 class Base(DeclarativeBase):
     pass
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+print(os.environ.get("DB_URI"))
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
